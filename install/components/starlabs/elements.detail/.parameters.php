@@ -1,6 +1,5 @@
 <?php
 
-use Bitrix\Main\Loader;
 use Starlabs\Tools\Bbc\Helpers\ComponentParameters;
 use Bitrix\Iblock;
 use Bitrix\Main\Localization\Loc;
@@ -9,15 +8,10 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 
-if (!Loader::includeModule('starlabs.tool')) {
-	return false;
-}
-
-
 Loc::loadMessages(__FILE__);
 
 try {
-	ComponentParameters::includeModules(['iblock']);
+	ComponentParameters::includeModules(['iblock', 'starlabs.tools']);
 
 	$iblockTypes = CIBlockParameters::GetIBlockTypes([0 => '']);
 	$iblocks = [];

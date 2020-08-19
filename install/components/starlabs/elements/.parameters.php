@@ -8,10 +8,6 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 
-if (!Loader::includeModule('starlabs.tool')) {
-	return false;
-}
-
 Loc::loadMessages(__FILE__);
 
 $currentZone = basename(dirname(__DIR__));
@@ -20,6 +16,7 @@ $currentZone = basename(dirname(__DIR__));
  * @global array $arCurrentValues
  */
 try {
+	ComponentParameters::includeModules(['starlabs.tools']);
 	$currentParameters = [
 		'GROUPS' => [
 			'LIST' => [

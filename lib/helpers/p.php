@@ -4,7 +4,7 @@ namespace Starlabs\Tools\Helpers;
 use Bitrix\Main\Context;
 use Bitrix\Main\Type\Date;
 
-class p
+class P
 {
 	private $die;
 	private $css;
@@ -19,11 +19,11 @@ class p
 
 	function __call($name, $arguments)
 	{
-		$nameDelimer = explode("_", $name);
-		if ($nameDelimer[1]) {
+		$separator = explode("_", $name);
+		if ($separator[1]) {
 			$name = "";
-			foreach ($nameDelimer as $key => $val) {
-				$name .= $val . (count($nameDelimer) > $key + 1 ? '-' : "");
+			foreach ($separator as $key => $val) {
+				$name .= $val . (count($separator) > $key + 1 ? '-' : "");
 			}
 		}
 		$this->css .= $name . ":" . $arguments[0] . ";";
