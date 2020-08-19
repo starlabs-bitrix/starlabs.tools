@@ -1,9 +1,6 @@
 <?php
 namespace Starlabs\Tools\Helpers\Patterns;
 
-use Exception;
-use Starlabs\Tools\Helpers\p;
-
 trait Singleton
 {
 	private static $instances = [];
@@ -17,11 +14,11 @@ trait Singleton
 	}
 
 	/**
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __wakeup()
 	{
-		throw new Exception("Cannot unserialize a singleton.");
+		throw new \Exception("Cannot unserialize a singleton.");
 	}
 
 	public static function getInstance(): self

@@ -1,8 +1,6 @@
 <?php
 namespace Starlabs\Tools\Helpers;
 
-use CharsetConverter;
-
 /**
  * Утилиты
  */
@@ -10,12 +8,12 @@ class Utils
 {
 	/**
 	 * Склоняет существительное с числительным
-     *
-     * @param integer $number Число
-     * @param array $cases Варианты существительного в разных падежах и числах (nominativ, genetiv, plural). Пример: array('комментарий', 'комментария', 'комментариев')
-     * @param boolean $incNum Добавить само число в результат
-     * @return string
-     */
+	 *
+	 * @param integer $number Число
+	 * @param array $cases Варианты существительного в разных падежах и числах. Пример: array('комментарий', 'комментария', 'комментариев')
+	 * @param boolean $incNum Добавить само число в результат
+	 * @return string
+	 */
     public static function getNumEnding($number, $cases, $incNum = true)
     {
         $numberMod = intval(preg_replace('/[^0-9.,]/', '', $number)) % 100;
@@ -30,33 +28,33 @@ class Utils
                 case 2:
                 case 3:
                 case 4:
-                    $result = $cases[1];
-                    break;
-                default:
-                    $result = $cases[2];
+	                $result = $cases[1];
+	                break;
+	            default:
+		            $result = $cases[2];
             }
         }
 
-        return $incNum ? $number . ' ' . $result : $result;
+	    return $incNum ? $number . ' ' . $result : $result;
     }
 
-    /**
-     * Обрезает текст, превыщающий заданную длину
-     *
-     * @param string $text Текст
-     * @param array $config Конфигурация
-     * @return string
-     */
-    public static function getEllipsis($text, $config = [])
-    {
-        $config = array_merge([
-            'mode' => 'word',
-            'count' => 255,
-            'suffix' => '&hellip;',
-            'stripTags' => true,
-        ], $config);
+	/**
+	 * Обрезает текст, превышающий заданную длину
+	 *
+	 * @param string $text Текст
+	 * @param array $config Конфигурация
+	 * @return string
+	 */
+	public static function getEllipsis($text, $config = [])
+	{
+		$config = array_merge([
+			'mode' => 'word',
+			'count' => 255,
+			'suffix' => '&hellip;',
+			'stripTags' => true,
+		], $config);
 
-        if ($config['stripTags']) {
+		if ($config['stripTags']) {
             $text = preg_replace([
                 '/(\r?\n)+/',
                 '/^(\r?\n)+/',
@@ -126,16 +124,11 @@ class Utils
                 $data->$key = self::convertCharset($val, $from, $to);
             }
         } elseif (is_bool($data) || is_numeric($data)) {
-            //do nothing
+	        return $data;
         } else {
-            $data = CharsetConverter::ConvertCharset($data, $from, $to, $error = '');
+	        $data = \Bitrix\Main\Text\Encoding::convertEncoding($data, $from, $to, $errorMessage);
         }
 
         return $data;
-    }
-
-    public static function numberFormat($number, $decimals = 2, $dec_point = '.', $thousands_sep = ' ')
-    {
-        return $number == 0 ? "0" : number_format($number, $decimals, $dec_point, $thousands_sep);
     }
 }
