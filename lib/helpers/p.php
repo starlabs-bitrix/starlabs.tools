@@ -4,7 +4,7 @@ namespace Starlabs\Tools\Helpers;
 use Bitrix\Main\Context;
 use Bitrix\Main\Type\Date;
 
-class P
+class p
 {
 	private $die;
 	private $css;
