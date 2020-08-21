@@ -6,4 +6,4 @@ if (!check_bitrix_sessid()) {
 	return;
 }
 
-CAdminMessage::ShowNote(Bitrix\Main\Localization\Loc::getMessage('SLTOOLS_MODULE_UNSTEP_FINISH'));
+CAdminMessage::ShowNote(Bitrix\Main\Localization\Loc::getMessage('SLTOOLS_MODULE_STEP_FINISH'));
