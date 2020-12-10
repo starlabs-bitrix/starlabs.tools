@@ -16,7 +16,7 @@ class Router
 	{
 		$this->Request = Application::getInstance()->getContext()->getRequest();
 
-		if ($this->Request->isAjaxRequest() === false) {
+		if ($this->Request->isAjaxRequest() === false && $this->Request->getQuery("ishook") !== 'y') {
 			throw new \Exception('Только ajax запросы пройдут');
 		}
 
